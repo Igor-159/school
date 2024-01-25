@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - include:
+        file: db/changelog/changeset/create-avatar-table.sql
+  - include:
+        file: db/changelog/changeset/create-house-table.sql
+  - include:
+      file: db/changelog/changeset/create-student-table.sql
+  - include:
+      file: db/changelog/changeset/add-index-to-student-name.sql
+  - include:
+      file: db/changelog/changeset/add-index-to-house-name-color.sql
+  - include:
+      file: db/changelog/changeset/create-avatar-sequence.sql
+
