@@ -3,6 +3,7 @@ package ru.hogwarts.school.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.hogwarts.school.dto.HouseReadDto;
@@ -85,10 +86,9 @@ public ResponseEntity<HouseReadDto> getHouseOfStudent(
 
 @PostMapping
     public StudentReadDto createStudent(
-        @RequestBody StudentCreateEditDto studentDto
+        @Validated @RequestBody StudentCreateEditDto studentDto
 ) {
     return studentService.createStudent(studentDto);
-
 }
 
 @PutMapping
@@ -96,11 +96,8 @@ public ResponseEntity<HouseReadDto> getHouseOfStudent(
         @PathVariable Long id,
         @RequestBody StudentCreateEditDto dto
 ) {
-
     return studentService.updateStudent(id, dto)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-
 }
 
 @DeleteMapping("/{id}")
