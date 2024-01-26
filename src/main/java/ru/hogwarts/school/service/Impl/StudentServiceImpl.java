@@ -6,12 +6,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.hogwarts.school.dto.HouseReadDto;
 import ru.hogwarts.school.dto.StudentCreateEditDto;
 
+import ru.hogwarts.school.dto.StudentDto;
 import ru.hogwarts.school.dto.StudentReadDto;
+import ru.hogwarts.school.mappers.HouseReadMapper;
 import ru.hogwarts.school.mappers.StudentCreateEditMapper;
 
 import ru.hogwarts.school.mappers.StudentReadMapper;
+import ru.hogwarts.school.model.House;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
@@ -28,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
     private final StudentReadMapper studentReadMapper;
     private final StudentCreateEditMapper studentCreateEditMapper;
-
+    private final HouseReadMapper houseReadMapper;
 
 
     @Transactional
@@ -38,6 +42,15 @@ public class StudentServiceImpl implements StudentService {
                 .map(studentRepository::save)
                 .map(studentReadMapper::map)
                 .orElseThrow();
+    }
+
+    public HouseReadDto getHouseOfStudent(Long id) {
+        Optional<Student> student = studentRepository.findById(id);
+        House house = student.get().getHouse();
+        return Optional.of(house)
+                .map(houseReadMapper::map)
+                .orElseThrow();
+
     }
 
     public Optional<StudentReadDto> getStudent(Long id) {
@@ -54,14 +67,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public List<StudentReadDto> getStudentsByAge(int age) {
-        List<StudentReadDto> arrayStudents = studentRepository.findStudentByAge(age);
-        log.info("getStudentsByAge");
-        return arrayStudents;
+        return studentRepository.findStudentByAge(age).stream()
+                .map(studentReadMapper::map)
+                .toList();
     }
 
-    public List<Student> getStudentByAgeRange(int minAge, int maxAge) {
+    public List<StudentReadDto> getStudentByAgeRange(int minAge, int maxAge) {
         log.info("getStudentByAgeRange");
-        return studentRepository.findAllByAgeBetween(minAge, maxAge);
+        return studentRepository.findAllByAgeBetween(minAge, maxAge).stream()
+                .map(studentReadMapper::map)
+                .toList();
     }
 
     public Integer getNumberOfStudents() {

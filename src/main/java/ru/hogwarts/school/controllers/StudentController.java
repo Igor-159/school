@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Tag(name = "student controller")
 @RestController
-@RequestMapping(value = "student")
+@RequestMapping(value = "students")
 
 public class StudentController {
     private final StudentService studentService;
@@ -38,31 +38,25 @@ public StudentController(StudentServiceImpl studentService) {
         return ResponseEntity.notFound().build();
 }
 
-//@GetMapping("/age-range")
-//    public ResponseEntity<List<StudentDto>> getStudentsByAgeRange(
-//            @RequestParam int minAge,
-//            @RequestParam int maxAge
-//) {
-//    List<Student> students = studentService.getStudentByAgeRange(minAge, maxAge);
-//    List<StudentDto> studentsDto = students.stream()
-//            .map(student -> StudentMapper.convertToDTO(student))
-//            .toList();
-//    return ResponseEntity.ok(studentsDto);
-//}
+@GetMapping("/age-range")
+    public ResponseEntity<List<StudentReadDto>> getStudentsByAgeRange(
+            @RequestParam int minAge,
+            @RequestParam int maxAge
+) {
+    List<StudentReadDto> students = studentService.getStudentByAgeRange(minAge, maxAge);
 
-//@GetMapping("/{id}/house")
-//public ResponseEntity<HouseReadDto> getStudentHouse(
-//        @PathVariable Long id
-//) {
-//    Optional<Student> student = studentService.getStudent(id);
-//    if(student.isPresent()) {
-//        House house = student.get().getHouse();
-//        HouseReadDto houseDto = HouseMapper.convertToHouseDTO(house);
-//        return ResponseEntity.ok(houseDto);
-//    }else{
-//        return ResponseEntity.notFound().build();
-//    }
-//}
+    return ResponseEntity.ok(students);
+}
+
+@GetMapping("/{id}/house")
+public ResponseEntity<HouseReadDto> getHouseOfStudent(
+        @PathVariable Long id
+) {
+    ;
+        HouseReadDto houseDto = studentService.getHouseOfStudent(id);
+        return ResponseEntity.ok(houseDto);
+
+}
 
 
 @GetMapping("/age/{value}")
@@ -70,11 +64,9 @@ public StudentController(StudentServiceImpl studentService) {
             @PathVariable int value
     ) {
         List<StudentReadDto> arrayStudent = studentService.getStudentsByAge(value);
-        List<StudentDto> studentsDto = arrayStudent.stream()
-                                            .map(student -> StudentMapper.convertToDTO(student))
-                                            .toList();
 
-        return ResponseEntity.ok(studentsDto);
+
+        return ResponseEntity.ok(arrayStudent);
 }
 
 @GetMapping

@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    List<StudentReadDto> findStudentByAge(int age);
+    List<Student> findStudentByAge(int age);
     List<Student> findAllByAgeBetween(int minAge, int maxAge);
 
     @Query("SELECT COUNT(*) FROM Student s")
