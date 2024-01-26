@@ -84,11 +84,11 @@ public ResponseEntity<HouseReadDto> getHouseOfStudent(
 
 
 @PostMapping
-    public ResponseEntity<StudentReadDto> createStudent(
+    public StudentReadDto createStudent(
         @RequestBody StudentCreateEditDto studentDto
 ) {
-    StudentReadDto student = studentService.createStudent(studentDto);
-    return  ResponseEntity.ok(student);
+    return studentService.createStudent(studentDto);
+
 }
 
 @PutMapping
