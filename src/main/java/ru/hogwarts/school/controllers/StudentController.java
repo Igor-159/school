@@ -1,19 +1,17 @@
 package ru.hogwarts.school.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ru.hogwarts.school.dto.HouseReadDto;
 import ru.hogwarts.school.dto.StudentCreateEditDto;
-import ru.hogwarts.school.dto.StudentDto;
 import ru.hogwarts.school.dto.StudentReadDto;
-import ru.hogwarts.school.model.House;
-import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.Impl.StudentServiceImpl;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Tag(name = "student controller")
 @RestController
@@ -27,15 +25,11 @@ public StudentController(StudentServiceImpl studentService) {
 }
 
 @GetMapping("/{id}")
-    public ResponseEntity<StudentReadDto> getStudentBuId(
+    public StudentReadDto getStudentBuId(
             @PathVariable Long id
 ) {
-    Optional<StudentReadDto> student = studentService.getStudent(id);
-
-        if(student.isPresent()){
-            return  ResponseEntity.ok(student.get());
-        }
-        return ResponseEntity.notFound().build();
+    return studentService.getStudent(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 }
 
 @GetMapping("/age-range")
@@ -52,7 +46,6 @@ public StudentController(StudentServiceImpl studentService) {
 public ResponseEntity<HouseReadDto> getHouseOfStudent(
         @PathVariable Long id
 ) {
-    ;
         HouseReadDto houseDto = studentService.getHouseOfStudent(id);
         return ResponseEntity.ok(houseDto);
 
@@ -99,14 +92,15 @@ public ResponseEntity<HouseReadDto> getHouseOfStudent(
 }
 
 @PutMapping
-    public ResponseEntity<StudentReadDto> updateStudent(
+    public StudentReadDto updateStudent(
         @PathVariable Long id,
         @RequestBody StudentCreateEditDto dto
 ) {
 
-    Optional<StudentReadDto> updatedStudent = studentService.updateStudent(id, dto);
+    return studentService.updateStudent(id, dto)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-    return  ResponseEntity.ok(updatedStudent.get());
+
 }
 
 @DeleteMapping("/{id}")
