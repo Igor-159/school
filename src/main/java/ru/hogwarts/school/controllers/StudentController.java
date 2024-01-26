@@ -101,12 +101,12 @@ public ResponseEntity<HouseReadDto> getHouseOfStudent(
 }
 
 @DeleteMapping("/{id}")
-    public ResponseEntity deleteStudent(
+    public void deleteStudent(
             @PathVariable Long id
 ) {
-        studentService.deleteStudent(id);
-
-        return  ResponseEntity.noContent().build();
+        if(studentService.deleteStudent(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
 }
 }
 
