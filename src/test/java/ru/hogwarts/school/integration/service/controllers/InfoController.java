@@ -1,4 +1,4 @@
-package ru.hogwarts.school.controllers;
+package ru.hogwarts.school.integration.service.controllers;
 
 
 import org.springframework.http.ResponseEntity;
