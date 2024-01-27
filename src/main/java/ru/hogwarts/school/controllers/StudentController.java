@@ -91,7 +91,7 @@ public ResponseEntity<HouseReadDto> getHouseOfStudent(
     return studentService.createStudent(studentDto);
 }
 
-@PutMapping
+@PutMapping("/{id}/update")
     public StudentReadDto updateStudent(
         @PathVariable Long id,
         @RequestBody StudentCreateEditDto dto
