@@ -28,8 +28,6 @@ public class StudentCreateEditMapper implements BaseMapper<StudentCreateEditDto,
     public Student map(StudentCreateEditDto object) {
         Student student = new Student();
         copy(object, student);
-
-
         return student;
     }
 
@@ -37,7 +35,7 @@ public class StudentCreateEditMapper implements BaseMapper<StudentCreateEditDto,
         student.setName(object.getName());
         student.setAge(object.getAge());
         student.setHouse(getHouse(object.getHouseId()));
-        student.setAvatar((getAvatar(object.getAvatarId())));
+        student.setAvatar(getAvatar(object.getAvatarId()));
     }
 
     private Avatar getAvatar(Long avatarId) {

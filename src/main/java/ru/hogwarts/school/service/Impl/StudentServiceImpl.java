@@ -102,8 +102,6 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public boolean deleteStudent(Long id) {
         log.info("deleteStudent");
-        studentRepository.deleteById(id);
-
         return studentRepository.findById(id)
                 .map(entity -> {
                     studentRepository.delete(entity);
