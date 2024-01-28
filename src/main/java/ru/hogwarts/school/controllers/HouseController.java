@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.hogwarts.school.dto.HouseReadDto;
+import ru.hogwarts.school.dto.StudentReadDto;
 import ru.hogwarts.school.exception.HouseNotFoundException;
 import ru.hogwarts.school.model.House;
 import ru.hogwarts.school.service.HouseService;
@@ -38,21 +39,6 @@ public class HouseController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));;
     }
 
-//    @GetMapping("/{id}/student")
-//    public ResponseEntity<List<Student>> getStudentByHouse(
-//            @PathVariable Long id
-//    ) {
-//        student
-//        Optional<House> house = houseService.getHouse(id);
-//
-//        if(house.isPresent()) {
-//            List<Student> students = house.get().getStudents();
-//            return ResponseEntity.ok(students);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//    }
 
     @Transactional
     @PostMapping
