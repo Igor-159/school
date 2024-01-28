@@ -6,14 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.hogwarts.school.dto.HouseReadDto;
-import ru.hogwarts.school.dto.StudentReadDto;
-import ru.hogwarts.school.exception.HouseNotFoundException;
+
 import ru.hogwarts.school.model.House;
 import ru.hogwarts.school.service.HouseService;
 import ru.hogwarts.school.service.Impl.HouseServiceImpl;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping(value = "/house")
@@ -36,14 +35,14 @@ public class HouseController {
     public HouseReadDto getHouseBuId(@PathVariable Long id) {
 
         return  houseService.getHouse(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));;
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
 
     @Transactional
     @PostMapping
-    public HouseReadDto createHouse(
-            @RequestBody HouseEdit house
+    public ResponseEntity<House> createHouse(
+            @RequestBody House house
 
     ) {
         House newHouse = houseService.createHouse(house);

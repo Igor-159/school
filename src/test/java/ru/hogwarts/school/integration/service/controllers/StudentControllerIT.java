@@ -1,20 +1,23 @@
 package ru.hogwarts.school.integration.service.controllers;
-//
-//import lombok.RequiredArgsConstructor;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.MockMvcBuilder;
-//import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-//import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-//import ru.hogwarts.school.annotation.IT;
-//import ru.hogwarts.school.dto.StudentCreateEditDto;
-//
-//@IT
-//@AutoConfigureMockMvc
-//@RequiredArgsConstructor
-//public class StudentControllerIT {
-//    private final MockMvc mockMvc;
+
+import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import ru.hogwarts.school.annotation.IT;
+import ru.hogwarts.school.dto.StudentCreateEditDto;
+
+
+@Disabled("Тесты отключены временно")
+@IT
+@AutoConfigureMockMvc
+@RequiredArgsConstructor
+public class StudentControllerIT {
+    private final MockMvc mockMvc;
 
 //    @Test
 //    void findAll() throws Exception {
@@ -34,4 +37,4 @@ package ru.hogwarts.school.integration.service.controllers;
 //                        status().is3
 //                )
 //    }
-//}
+}

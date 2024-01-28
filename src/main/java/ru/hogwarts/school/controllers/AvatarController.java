@@ -27,16 +27,13 @@ import java.util.List;
 @Tag(name = "avatar controller")
 @RestController
 @RequestMapping("/avatars")
-
+@RequiredArgsConstructor
 public class AvatarController {
 
     private final AvatarService avatarService;
     private final AvatarReadMapper avatarReadMapper;
 
-    public AvatarController(AvatarService avatarService, AvatarReadMapper avatarReadMapper) {
-        this.avatarService = avatarService;
-        this.avatarReadMapper = avatarReadMapper;
-    }
+
 
     @PostMapping(value = "/{id}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadAvatar(@PathVariable Long id, @RequestParam MultipartFile avatar) throws IOException {

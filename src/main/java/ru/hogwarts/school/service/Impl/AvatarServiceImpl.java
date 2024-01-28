@@ -1,6 +1,7 @@
 package ru.hogwarts.school.service.Impl;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AvatarServiceImpl implements AvatarService {
 
 
@@ -34,10 +36,6 @@ public class AvatarServiceImpl implements AvatarService {
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
-    public AvatarServiceImpl(AvatarRepository avatarRepository, StudentRepository studentRepository) {
-        this.avatarRepository = avatarRepository;
-        this.studentRepository = studentRepository;
-    }
 
     public Page<Avatar> getAllAvatars(Pageable pageable) {
         log.info("getAllAvatars");
@@ -85,10 +83,10 @@ public class AvatarServiceImpl implements AvatarService {
 
 
 
-//    @Override
-//    public Avatar findAvatar(Long studentId) {
-//         Student result = studentRepository.findById(studentId).get();
-//         log.info("findAvatar");
-//         return result.getAvatar();
-//    }
+    @Override
+    public Avatar findAvatar(Long studentId) {
+         Student result = studentRepository.findById(studentId).get();
+         log.info("findAvatar");
+         return result.getAvatar();
+    }
 }
