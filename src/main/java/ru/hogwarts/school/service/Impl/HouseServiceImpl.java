@@ -40,8 +40,10 @@ public class HouseServiceImpl  implements HouseService {
 
     }
 
-    public Optional<House> getHouse(Long id) {
-        return houseRepository.findById(id);
+    public Optional<HouseReadDto> getHouse(Long id) {
+
+        return houseRepository.findById(id)
+                .map(houseReadMapper::map);
     }
 
     @Transactional

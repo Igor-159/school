@@ -11,7 +11,7 @@ public interface HouseService {
 
     public House createHouse(House house);
 
-    public Optional<House> getHouse(Long id);
+    public Optional<HouseReadDto> getHouse(Long id);
 
     public House updateHouse(Long id, String newColor);
 
