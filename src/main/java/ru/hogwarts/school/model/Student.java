@@ -17,7 +17,7 @@ public class Student {
     private int age;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "house_id")
     private House house;
 

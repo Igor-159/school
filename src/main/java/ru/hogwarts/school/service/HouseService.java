@@ -16,7 +16,7 @@ public interface HouseService {
 
     public House updateHouse(Long id, String newColor);
 
-    public House deleteHouse(Long id);
+    public boolean deleteHouse(Long id);
 
     public List<House> getHousesByColor(String color);
 

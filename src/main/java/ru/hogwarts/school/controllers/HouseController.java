@@ -42,8 +42,8 @@ public class HouseController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<House> createHouse(
-            @RequestBody House house
+    public HouseReadDto createHouse(
+            @RequestBody HouseEdit house
 
     ) {
         House newHouse = houseService.createHouse(house);
@@ -62,8 +62,9 @@ public class HouseController {
 
     @DeleteMapping("/{id}")
     public void deleteHouse(@PathVariable Long id){
-        House house = houseService.getHouse(id).orElseThrow(() -> new HouseNotFoundException("User id " + id + " was not found"));
-        houseService.deleteHouse(house.getId());
+        if(houseService.deleteHouse(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
 
     }
 

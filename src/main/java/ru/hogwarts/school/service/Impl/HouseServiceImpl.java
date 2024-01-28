@@ -63,11 +63,15 @@ public class HouseServiceImpl  implements HouseService {
 
     }
 
-    public House deleteHouse(Long id) {
-        House house = houseRepository.getReferenceById(id);
-        houseRepository.delete(house);
-        log.info("deleteHouse");
-        return house;
+    public boolean deleteHouse(Long id) {
+        log.info("deleteStudent");
+        return houseRepository.findById(id)
+                .map(entity -> {
+                    houseRepository.delete(entity);
+                    houseRepository.flush();
+                    return true;
+                })
+                .orElse(false);
     }
 
     public List<House> getHousesByColor(String color) {
