@@ -47,6 +47,7 @@ public class StudentServiceImpl implements StudentService {
     public HouseReadDto getHouseOfStudent(Long id) {
         Optional<Student> student = studentRepository.findById(id);
         House house = student.get().getHouse();
+        log.info("getHouseByStudent");
         return Optional.of(house)
                 .map(houseReadMapper::map)
                 .orElseThrow();

@@ -1,9 +1,12 @@
 package ru.hogwarts.school.service.Impl;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.hogwarts.school.dto.HouseReadDto;
+import ru.hogwarts.school.mappers.HouseReadMapper;
 import ru.hogwarts.school.model.House;
 import ru.hogwarts.school.repository.HouseRepository;
 import ru.hogwarts.school.service.HouseService;
@@ -13,17 +16,18 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class HouseServiceImpl  implements HouseService {
 
     private final HouseRepository houseRepository;
+    private final HouseReadMapper houseReadMapper;
 
-    @Autowired
-    public HouseServiceImpl(HouseRepository houseRepository) {
-        this.houseRepository = houseRepository;
-    }
-    public List<House> getAllHouse() {
 
-        List<House> result = houseRepository.findAll();
+    public List<HouseReadDto> getAllHouse() {
+
+        List<HouseReadDto> result = houseRepository.findAll().stream()
+                .map(houseReadMapper::map)
+                .toList();
         log.info("getAllHouse");
         return result;
     }

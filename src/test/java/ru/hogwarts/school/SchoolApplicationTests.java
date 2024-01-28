@@ -49,7 +49,7 @@ public class SchoolApplicationTests {
 	@Test
 	public void testGetStudent() throws Exception {
 		Assertions
-				.assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/student", String.class))
+				.assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/students", String.class))
 								.isNotNull();
 	}
 

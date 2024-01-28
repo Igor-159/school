@@ -85,10 +85,10 @@ public class AvatarServiceImpl implements AvatarService {
 
 
 
-    @Override
-    public Avatar findAvatar(Long studentId) {
-         Student result = studentRepository.findById(studentId).get();
-         log.info("findAvatar");
-         return result.getAvatar();
-    }
+//    @Override
+//    public Avatar findAvatar(Long studentId) {
+//         Student result = studentRepository.findById(studentId).get();
+//         log.info("findAvatar");
+//         return result.getAvatar();
+//    }
 }

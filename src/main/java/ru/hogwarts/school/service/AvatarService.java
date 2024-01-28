@@ -11,7 +11,7 @@ import java.io.IOException;
 public interface AvatarService {
 
     void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException;
-    Avatar findAvatar(Long studentId);
+//    Avatar findAvatar(Long studentId);
 
     Page<Avatar> getAllAvatars(Pageable pageable);
 }

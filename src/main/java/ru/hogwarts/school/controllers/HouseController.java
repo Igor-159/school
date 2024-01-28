@@ -24,26 +24,23 @@ public class HouseController {
     }
 
     @GetMapping
-//    public ResponseEntity<List<HouseReadDto>> getAllHouse() {
-//        var resultList = houseService.getAllHouse().stream()
-//                .map(house -> HouseMapper.convertToHouseDTO(house))
-//                .toList();
-//
-//        return ResponseEntity.ok(resultList);
-//    }
+    public ResponseEntity<List<HouseReadDto>> getAllHouse() {
+        var resultList = houseService.getAllHouse();
+        return ResponseEntity.ok(resultList);
+    }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<HouseReadDto> getHouseBuId(@PathVariable Long id) {
-//        var result = houseService.getHouse(id);
-//
-//        if(result.isPresent()) {
-//            House house = result.get();
-//            HouseReadDto houseDto = HouseMapper.convertToHouseDTO(house);
-//            return ResponseEntity.ok(houseDto);
-//        }
-//            return ResponseEntity.notFound().build();
-//
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<HouseReadDto> getHouseBuId(@PathVariable Long id) {
+        var result = houseService.getHouse(id);
+
+        if(result.isPresent()) {
+            House house = result.get();
+            HouseReadDto houseDto = HouseMapper.convertToHouseDTO(house);
+            return ResponseEntity.ok(houseDto);
+        }
+            return ResponseEntity.notFound().build();
+
+    }
 
 //    @GetMapping("/{id}/student")
 //    public ResponseEntity<List<Student>> getStudentByHouse(
